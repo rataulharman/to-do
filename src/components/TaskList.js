@@ -1,16 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function TaskList(props) {
   return (
     <div>
       {props.tasks.map((task) => (
-        <div key={task.id} className="task">
+        <div
+          key={task.id}
+          className={task.completed ? "task completed" : "task"}>
           <div>
             <h3>{task.text}</h3>
             <p>{task.date}</p>
           </div>
-
           <div className="icons">
             <FontAwesomeIcon
               icon={faCheck}
@@ -19,9 +20,13 @@ function TaskList(props) {
                   type: "COMPLETE_TASK",
                   payload: task.id
                 })
-              }
-            />
-
+              }/>
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
+                props.setEditId(task.id);
+                props.setTaskText(task.text);
+              }}/>
             <FontAwesomeIcon
               icon={faTrash}
               onClick={() =>
@@ -29,8 +34,7 @@ function TaskList(props) {
                   type: "DELETE_TASK",
                   payload: task.id
                 })
-              }
-            />
+              }/>
           </div>
         </div>
       ))}

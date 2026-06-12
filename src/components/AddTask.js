@@ -1,19 +1,19 @@
 function AddTask(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!props.taskText.trim()) return;
-
-    if (props.editId === null) {
-      props.dispatch({
-        type: "ADD_TASK",
-        payload: {
-          id: Date.now(),
-          text: props.taskText,
-          completed: false,
-          date: new Date().toLocaleString()
-        }
-      });
-    } else {
+     if (!props.taskText.trim())
+        return;
+if (props.editId === null) {
+    props.dispatch({
+      type: "ADD_TASK",
+      payload: {
+        id: Date.now(),
+        text: props.taskText,
+        completed: false,
+        date: new Date().toLocaleString()
+      }
+    });
+}   else {
       props.dispatch({
         type: "EDIT_TASK",
         payload: {
@@ -21,24 +21,23 @@ function AddTask(props) {
           text: props.taskText
         }
       });
-
-      props.setEditId(null);
+        props.setEditId(null);
     }
-
     props.setTaskText("");
   };
 
   return (
     <section className="task-add">
-      <form onSubmit={handleSubmit}>
-        <input
-          value={props.taskText}
-          onChange={(e) => props.setTaskText(e.target.value)}
-        />
-        <button>
-          {props.editId === null ? "Add Task" : "Update Task"}
-        </button>
-      </form>
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder="Enter a task"
+                value={props.taskText}
+                onChange={(e) => props.setTaskText(e.target.value)}/>
+            <button type="submit">
+                {props.editId === null ? "Add Task" : "Update Task"}
+            </button>
+        </form>
     </section>
   );
 }
