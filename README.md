@@ -15,10 +15,9 @@ The app uses the `useReducer` hook for state management.
 
 - React
 - JavaScript (ES6+)
-- HTML5
-- CSS3
+- HTML
+- CSS
 - useReducer Hook
-- FontAwesome Icons
 
 ## State Management
 
