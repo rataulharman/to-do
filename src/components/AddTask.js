@@ -1,34 +1,43 @@
-import { useState } from "react";
-
 function AddTask(props) {
-  const [text, setText] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text.trim()) return;
+    if (!props.taskText.trim()) return;
 
-    props.dispatch({
-      type: "ADD_TASK",
-      payload: {
-        id: Date.now(),
-        text,
-        completed: false,
-        date: new Date().toLocaleString()
-      }
-    });
+    if (props.editId === null) {
+      props.dispatch({
+        type: "ADD_TASK",
+        payload: {
+          id: Date.now(),
+          text: props.taskText,
+          completed: false,
+          date: new Date().toLocaleString()
+        }
+      });
+    } else {
+      props.dispatch({
+        type: "EDIT_TASK",
+        payload: {
+          id: props.editId,
+          text: props.taskText
+        }
+      });
 
-    setText("");
+      props.setEditId(null);
+    }
+
+    props.setTaskText("");
   };
 
   return (
     <section className="task-add">
       <form onSubmit={handleSubmit}>
         <input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Enter a task"
+          value={props.taskText}
+          onChange={(e) => props.setTaskText(e.target.value)}
         />
-        <button>Add Task</button>
+        <button>
+          {props.editId === null ? "Add Task" : "Update Task"}
+        </button>
       </form>
     </section>
   );
