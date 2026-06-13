@@ -14,7 +14,7 @@ The app uses the `useReducer` hook for state management.
 ## Technologies Used
 
 - React
-- JavaScript (ES6+)
+- JavaScript (ES6)
 - HTML
 - CSS
 - useReducer Hook
